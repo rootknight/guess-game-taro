@@ -39,7 +39,7 @@
   ],
   "author": "",
   "dependencies": {
-    "@babel/runtime": "^7.21.5",
+    "@babel/runtime": "^7.23.9",
     "@tarojs/components": "3.6.23",
     "@tarojs/helper": "3.6.23",
     "@tarojs/plugin-framework-react": "3.6.23",
@@ -72,6 +72,7 @@
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
+    "@unocss/webpack": "^0.58.5",
     "autoprefixer": "^10.4.17",
     "babel-preset-taro": "3.6.23",
     "eslint": "^8.12.0",
@@ -87,6 +88,8 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.1.0",
+    "unocss": "^0.58.5",
+    "unocss-preset-weapp": "^0.58.5",
     "webpack": "5.78.0"
   }
 }
