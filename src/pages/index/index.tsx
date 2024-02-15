@@ -1,12 +1,22 @@
 import { View, Swiper, SwiperItem } from '@tarojs/components';
 import { useLoad } from '@tarojs/taro';
 import CategoryCard from '@/components/CategoryCard';
-import './index.scss';
+import { getCategories } from '@/lib/fetchers/data';
+import { useState } from 'react';
 
 export default function Index() {
+  const [categories, setCategories] = useState([]);
   useLoad(() => {
-    console.log('Page loaded.');
+    const fetchData = async () => {
+      const result: any = await getCategories();
+      const categories = result.data.categories;
+      setCategories(categories);
+    };
+
+    fetchData();
   });
+
+  console.log(categories);
 
   return (
     <View className='p-2'>
@@ -17,40 +27,20 @@ export default function Index() {
           circular
           indicatorDots
           autoplay
+          className='bg-blue-500 rounded'
         >
           <SwiperItem>
-            <View>你比划我猜使用说明</View>
+            <View className='text-white center'>你比划我猜使用说明</View>
           </SwiperItem>
         </Swiper>
         <View className='grid grid-cols-2 gap-2'>
-          {[
-            '中国成语',
-            '日用品',
-            '动物',
-            '植物',
-            '中国成语',
-            '日用品',
-            '动物',
-            '植物',
-            '中国成语',
-            '日用品',
-            '动物',
-            '植物',
-            '中国成语',
-            '日用品',
-            '动物',
-            '植物',
-            '中国成语',
-            '日用品',
-            '动物',
-            '植物',
-          ].map((item) => {
+          {categories.map((item: any) => {
             return (
               <CategoryCard
-                key={item}
-                type='idiom'
-                title='中国成语'
-                desc='中国成语'
+                key={item.id}
+                type={item.type}
+                title={item.title}
+                desc={item.description}
               />
             );
           })}

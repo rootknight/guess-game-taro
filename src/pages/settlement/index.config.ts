@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '你猜',
+  navigationBarTitleText: '游戏结束',
 });

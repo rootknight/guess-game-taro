@@ -1,4 +1,4 @@
-import { Button, Radio, RadioGroup } from '@tarojs/components';
+import { Button, Radio, RadioGroup, Text } from '@tarojs/components';
 import {
   AtModal,
   AtModalHeader,
@@ -7,12 +7,15 @@ import {
   AtRadio,
 } from 'taro-ui';
 import Taro from '@tarojs/taro';
+import { useState } from 'react';
 
-export default function SelectTime({ isOpen, setIsOpen }) {
+export default function SelectTime({ isOpen, setIsOpen, title, type, desc }) {
+  const [radioValue, setRadioValue] = useState('60');
   return (
     <AtModal isOpened={isOpen} className='selectTime'>
-      <AtModalHeader>中国成语</AtModalHeader>
+      <AtModalHeader>{title}</AtModalHeader>
       <AtModalContent>
+        <Text>{desc}</Text>
         <AtRadio
           options={[
             { label: '60秒', value: '60' },
@@ -21,15 +24,19 @@ export default function SelectTime({ isOpen, setIsOpen }) {
             { label: '240秒', value: '240' },
             { label: '300秒', value: '300' },
           ]}
-          value='60'
-          onClick={() => {}}
+          value={radioValue}
+          onClick={(value) => {
+            setRadioValue(value);
+          }}
         />
       </AtModalContent>
       <AtModalAction>
         <Button
           onClick={() => {
             setIsOpen(false);
-            Taro.redirectTo({ url: '/pages/game/index' });
+            Taro.redirectTo({
+              url: `/pages/game/index?category=${type}&time=${radioValue}`,
+            });
           }}
         >
           开始游戏

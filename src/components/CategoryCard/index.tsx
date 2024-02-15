@@ -14,7 +14,13 @@ export default function CategoryCard({ type, title, desc }) {
       >
         {title}
       </AtButton>
-      <SelectTime isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SelectTime
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={title}
+        type={type}
+        desc={desc}
+      />
     </>
   );
 }
