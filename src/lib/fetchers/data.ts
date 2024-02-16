@@ -30,7 +30,7 @@ export const getCategories = async () => {
   }
 };
 
-export const getWordsByCategory = async (category) => {
+export const getWordsByCategory = async (category: string) => {
   try {
     const res = await request(`getWordsByCategory?category=${category}`);
     return res;

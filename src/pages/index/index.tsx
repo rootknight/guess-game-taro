@@ -7,16 +7,10 @@ import { useState } from 'react';
 export default function Index() {
   const [categories, setCategories] = useState([]);
   useLoad(() => {
-    const fetchData = async () => {
-      const result: any = await getCategories();
-      const categories = result.data.categories;
-      setCategories(categories);
-    };
-
-    fetchData();
+    getCategories().then((res: any) => {
+      setCategories(res.data.categories);
+    });
   });
-
-  console.log(categories);
 
   return (
     <View className='p-2'>
