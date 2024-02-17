@@ -34,7 +34,7 @@ export default function SelectTime({ isOpen, setIsOpen, title, type, desc }) {
         <Button
           onClick={() => {
             setIsOpen(false);
-            Taro.redirectTo({
+            Taro.navigateTo({
               url: `/pages/game/index?category=${type}&time=${radioValue}`,
             });
           }}

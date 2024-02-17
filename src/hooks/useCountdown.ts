@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 
-type UseCountdown = (num: number, isStart: boolean) => [number, boolean];
+type UseCountdown = (num: any, isStart: boolean) => [number, boolean];
 // 传入秒数,是否开始,返回当前计时和是否结束
 const useCountdown: UseCountdown = (
   num: number = 10,

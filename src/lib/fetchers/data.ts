@@ -1,40 +1,32 @@
 import Taro from '@tarojs/taro';
 
-const baseUrl = 'https://localhost:3000/api';
+export const baseUrl = process.env.TARO_APP_API;
 
-function request(opiton) {
-  return new Promise((resolve, reject) => {
-    Taro.request({
-      url: `${baseUrl}/${opiton}`,
-      data: {},
-      dataType: 'json',
-      header: {
-        'content-type': 'application/json',
-      },
-      success: (res) => resolve(res.data),
-      fail: (err) => {
-        // 统一处理错误
-        console.error('请求失败', err);
-        reject(err);
-      },
-    });
+export const api = async (path: string, method?: any) => {
+  const result = await Taro.request({
+    url: `${baseUrl}${path}`,
+    method: method || 'GET',
+    dataType: 'json',
+    header: {
+      'content-type': 'application/json',
+    },
+    success: (res) => {
+      return res.data;
+    },
+    fail: (err) => {
+      // 统一处理错误
+      console.error('请求失败', err);
+    },
   });
-}
+  return result;
+};
 
 export const getCategories = async () => {
-  try {
-    const res = await request('getCategories');
-    return res;
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await api('/getCategories');
+  return res.data;
 };
 
 export const getWordsByCategory = async (category: string) => {
-  try {
-    const res = await request(`getWordsByCategory?category=${category}`);
-    return res;
-  } catch (error) {
-    console.error(error);
-  }
+  const res = await api(`/getWordsByCategory?category=${category}`);
+  return res.data;
 };

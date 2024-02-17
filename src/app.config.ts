@@ -1,6 +1,6 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index',
+    'pages/home/index',
     'pages/game/index',
     'pages/records/index',
     'pages/settlement/index',
@@ -11,4 +11,7 @@ export default defineAppConfig({
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
   },
+  debug: true,
+  resizable: true,
+  lazyCodeLoading: 'requiredComponents',
 });

@@ -9,15 +9,15 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/settlement/index",
-          "pathName": "pages/settlement/index",
-          "query": "",
+          "name": "pages/game/index",
+          "pathName": "pages/game/index",
+          "query": "category=necessities&time=10",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/game/index",
-          "pathName": "pages/game/index",
+          "name": "pages/settlement/index",
+          "pathName": "pages/settlement/index",
           "query": "",
           "launchMode": "default",
           "scene": null
