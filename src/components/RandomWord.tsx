@@ -4,6 +4,7 @@ import phoneSkip from '@/public/images/phoneSkip.png';
 import phoneSuccess from '@/public/images/phoneSuccess.png';
 import { useState, useEffect, useRef } from 'react';
 import useCountdown from '@/hooks/useCountdown';
+import Countdown from '@/components/Countdown';
 import Taro from '@tarojs/taro';
 import dayjs from 'dayjs';
 
@@ -17,6 +18,7 @@ export default function RandomWord({
   isEarlyEnd,
   setBgColor,
   setIsStartCountDown,
+  sounds,
 }) {
   const [disText, setDisText] = useState<any>('准备');
   const [isExtractedOver, setIsExtractedOver] = useState<boolean>(false);
@@ -50,13 +52,13 @@ export default function RandomWord({
       setDisText('请横向举在头顶');
     } else if (readyCount <= 3 && readyCount > 0) {
       //准备倒计时
-      // sounds.countDownSound.play();
+      sounds.countDownSound.play();
       setDisText(`准备: ${readyCount}`);
     }
 
     //准备结束
     if (isReadyEnd) {
-      // sounds.countDownEndSound.play();
+      sounds.countDownEndSound.play();
       Taro.vibrateShort({ type: 'heavy' }); // 重震动
       getRandomWord();
       setIsStartCountDown(true);
@@ -67,7 +69,7 @@ export default function RandomWord({
   // 从剩余可选词组随机抽词
   const getRandomWord = () => {
     setBgColor('bg-blue-500');
-    // sounds.getRandomWordSound.play();
+    sounds.getRandomWordSound.play();
     // 从剩余可选词组中随机抽取一个
     const remainingWords = words.filter(
       (word) => !extractedWords.current.includes(word)
@@ -89,7 +91,7 @@ export default function RandomWord({
 
   const onSuccess = (word: string) => {
     // 播放成功音效
-    // sounds.successSound.play();
+    sounds.successSound.play();
     //设置背景颜色为绿色
     setDisText('正确');
     setBgColor('bg-green-500');
@@ -99,7 +101,7 @@ export default function RandomWord({
 
   const onSkip = (word: string) => {
     // 播放跳过音效
-    // sounds.skipSound.play();
+    sounds.skipSound.play();
     //设置背景颜色为红色
     setDisText('跳过');
     setBgColor('bg-rose-500');
@@ -162,7 +164,7 @@ export default function RandomWord({
   useEffect(() => {
     if (isEnd || isExtractedOver || isEarlyEnd) {
       // 播放gameover音效
-      // sounds.countDownEndSound.play();
+      sounds.countDownEndSound.play();
       //将抽取过的词存入LocalStorage
       // 获取之前的数据
       const res = Taro.getStorageSync('words');
@@ -183,27 +185,28 @@ export default function RandomWord({
       Taro.setStorageSync('words', JSON.stringify(updatedwords));
       //跳转至结果页
       Taro.redirectTo({
-        url: '/pages/settlement/index',
+        url: '/pages/settlement/page',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEnd, isEarlyEnd, isExtractedOver]);
 
   return (
-    <View className='flex flex-col justify-around h-full'>
-      <Text className='text-white text-xl center pt-4'>{disText}</Text>
-      <View className='flex justify-between pb-1'>
+    <View className='flex flex-col justify-between h-full'>
+      <Countdown time={time} count={count} isEnd={isEnd} />
+      <Text className='text-white text-xl center'>{disText}</Text>
+      <View className='flex justify-between pb-8'>
         <View className='flex flex-col items-center'>
           <Text className='text-sm text-white'>
             跳过 {skipWords.current.length}
           </Text>
-          <Image className='w-[64px] h-[32px]' src={phoneSkip} />
+          <Image className='w-128PX h-64PX' src={phoneSkip} />
         </View>
         <View className='flex flex-col items-center'>
           <Text className='text-sm text-white'>
             成功 {successWords.current.length}
           </Text>
-          <Image className='w-[64px] h-[32px]' src={phoneSuccess} />
+          <Image className='w-128PX h-64PX' src={phoneSuccess} />
         </View>
       </View>
     </View>

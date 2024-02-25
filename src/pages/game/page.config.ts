@@ -3,4 +3,5 @@ export default definePageConfig({
   pageOrientation: 'landscape',
   disableScroll: true,
   disableSwipeBack: true,
+  navigationStyle: 'custom',
 });

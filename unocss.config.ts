@@ -1,4 +1,5 @@
 import { presetWeapp } from 'unocss-preset-weapp';
+import { presetIcons } from 'unocss';
 import {
   extractorAttributify,
   transformerClass,
@@ -31,6 +32,13 @@ export default {
     ),
     // attributify autocomplete
     presetWeappAttributify(),
+
+    presetIcons({
+      collections: {
+        octicon: () =>
+          import('@iconify-json/octicon/icons.json').then((i) => i.default),
+      },
+    }),
   ],
   shortcuts: [
     {
@@ -48,3 +56,4 @@ export default {
     transformerClass(),
   ],
 };
+

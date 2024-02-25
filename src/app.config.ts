@@ -1,9 +1,10 @@
 export default defineAppConfig({
+  lazyCodeLoading: 'requiredComponents',
   pages: [
-    'pages/home/index',
-    'pages/game/index',
-    'pages/records/index',
-    'pages/settlement/index',
+    'pages/home/page',
+    'pages/game/page',
+    'pages/records/page',
+    'pages/settlement/page',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -13,5 +14,4 @@ export default defineAppConfig({
   },
   debug: true,
   resizable: true,
-  lazyCodeLoading: 'requiredComponents',
 });

@@ -56,7 +56,6 @@
     "@tarojs/runtime": "3.6.23",
     "@tarojs/shared": "3.6.23",
     "@tarojs/taro": "3.6.23",
-    "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -64,6 +63,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@iconify-json/octicon": "^1.1.52",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@tarojs/cli": "3.6.23",
     "@tarojs/taro-loader": "3.6.23",

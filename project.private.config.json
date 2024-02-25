@@ -9,15 +9,22 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/game/index",
-          "pathName": "pages/game/index",
-          "query": "category=necessities&time=10",
+          "name": "pages/records/page",
+          "pathName": "pages/records/page",
+          "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/settlement/index",
-          "pathName": "pages/settlement/index",
+          "name": "pages/game/page",
+          "pathName": "pages/game/page",
+          "query": "category=idiom&time=999",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/settlement/page",
+          "pathName": "pages/settlement/page",
           "query": "",
           "launchMode": "default",
           "scene": null
