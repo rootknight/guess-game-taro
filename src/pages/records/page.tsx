@@ -1,21 +1,12 @@
 import { View, Text } from '@tarojs/components';
 import { AtButton } from 'taro-ui';
-import Taro, { useLoad } from '@tarojs/taro';
-import CategoryCard from '@/components/CategoryCard';
+import Taro from '@tarojs/taro';
 import NavCustom from '@/components/NavCustom';
-import { getCategories } from '@/lib/fetchers/data';
-import { useState } from 'react';
-import menuInfo from '@/lib/getMenuInfo';
+import Records from '@/components/Records';
+import getMenuInfo from '@/lib/getMenuInfo';
 
 export default function Index() {
-  const [categories, setCategories] = useState([]);
-  const { safeTop, menuRight } = menuInfo;
-
-  useLoad(() => {
-    getCategories().then((res: any) => {
-      setCategories(res.data.categories);
-    });
-  });
+  const { safeTop, menuRight } = getMenuInfo();
 
   return (
     <View>
@@ -35,9 +26,10 @@ export default function Index() {
       </NavCustom>
       <View
         className='h-100vh bg-gradient-to-b from-gray-200 to-white'
-        style={`padding:${safeTop}px ${menuRight}px`}
+        style={`padding:0px ${menuRight}px`}
       >
-        {/* 内容 */}
+        <View style={`height:${safeTop}px`}></View>
+        <Records />
       </View>
     </View>
   );

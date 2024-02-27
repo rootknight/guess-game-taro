@@ -1,10 +1,9 @@
-import { View, Text, Button } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { AtButton } from 'taro-ui';
-import Taro, { useDidHide, useLoad, useRouter } from '@tarojs/taro';
+import Taro, { useLoad, useRouter } from '@tarojs/taro';
 import { getWordsByCategory } from '@/lib/fetchers/data';
 import RandomWord from '@/components/RandomWord';
 import QuitModal from '@/components/QuitModal';
-import NavCustom from '@/components/NavCustom';
 import { useEffect, useState } from 'react';
 import useCountdown from '@/hooks/useCountdown';
 import countdown from '@/public/sounds/countdown.mp3';
@@ -12,7 +11,7 @@ import countdownEnd from '@/public/sounds/countdownEnd.mp3';
 import getRandomWord from '@/public/sounds/getRandomWord.mp3';
 import skip from '@/public/sounds/skip.mp3';
 import success from '@/public/sounds/success.mp3';
-import menuInfo from '@/lib/getMenuInfo';
+import getMenuInfo from '@/lib/getMenuInfo';
 
 export default function Index() {
   const router = useRouter();
@@ -26,15 +25,13 @@ export default function Index() {
   const [isEarlyEnd, setIsEarlyEnd] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [sounds, setSounds] = useState<any>({});
-  const { safeTop, menuRight } = menuInfo;
+  const { height, top, menuRight } = getMenuInfo();
 
   useLoad((options) => {
     // 保持屏幕常亮
     Taro.setKeepScreenOn({
       keepScreenOn: true,
     });
-    Taro.setScreenBrightness({ value: 1 });
-    Taro.hideHomeButton();
     Taro.stopPullDownRefresh();
 
     const countDownSound = Taro.createInnerAudioContext();
@@ -64,13 +61,6 @@ export default function Index() {
     });
   });
 
-  useDidHide(() => {
-    Taro.setKeepScreenOn({
-      keepScreenOn: false,
-    });
-    Taro.setScreenBrightness({ value: 0.5 });
-  });
-
   //最后10秒倒计时
   useEffect(() => {
     if (count <= 10) {
@@ -81,26 +71,27 @@ export default function Index() {
   }, [count]);
 
   return (
-    <View>
-      <NavCustom>
-        <View className='w-8 opacity-60'>
+    <View
+      style={`padding:0 ${menuRight}px`}
+      className={`h-100vh bg-blue-500 ${bgColor} flex flex-col`}
+    >
+      <View className={`z-50 fixed`} style={`height:${height}px;top:${top}px`}>
+        <View className='h-full'>
           <AtButton
-            className='bg-white rounded-full h-full center'
+            className='bg-white rounded-full h-full center w-8 opacity-80'
             onClick={() => setIsOpen(true)}
           >
             <View className='i-octicon-x text-14PX text-black'></View>
           </AtButton>
+          <QuitModal
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            setIsEarlyEnd={setIsEarlyEnd}
+          />
         </View>
-        <QuitModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          setIsEarlyEnd={setIsEarlyEnd}
-        />
-      </NavCustom>
-      <View
-        className={`h-100vh bg-blue-500 relative ${bgColor}`}
-        style={`padding:${safeTop}px ${menuRight}px`}
-      >
+      </View>
+      <View style={`height:${top + height + 16}px`}></View>
+      <View className='grow'>
         <RandomWord
           type={type}
           title={categoryTitle}

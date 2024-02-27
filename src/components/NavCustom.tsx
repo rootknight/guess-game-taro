@@ -1,16 +1,15 @@
 import { View } from '@tarojs/components';
 import { usePageScroll } from '@tarojs/taro';
 import { useState } from 'react';
-import menuInfo from '@/lib/getMenuInfo';
+import getMenuInfo from '@/lib/getMenuInfo';
 
 const NavCustom = ({ children }: { children: React.ReactNode }) => {
   const [bgColor, setBgColor] = useState('bg-transparent');
-  const { height, navBarHeight, statusBarHeight, menuTop, menuRight } =
-    menuInfo;
+  const { height, navBarHeight, statusBarHeight, menuRight } = getMenuInfo();
 
   usePageScroll((res) => {
     if (res.scrollTop >= 4) {
-      setBgColor('bg-white');
+      setBgColor('bg-white shadow-lg');
     } else if (res.scrollTop === 0) {
       setBgColor('bg-transparent');
     }
@@ -22,12 +21,12 @@ const NavCustom = ({ children }: { children: React.ReactNode }) => {
       <View className='w-full' style={`height:${statusBarHeight}px`}></View>
       {/* 导航栏 */}
       <View
-        className='w-full'
-        style={`height:${navBarHeight}px;top:${statusBarHeight}px`}
+        className='w-full flex flex-col justify-center'
+        style={`height:${navBarHeight}px`}
       >
         <View
           className='flex justify-between'
-          style={`height:${height}px;padding:${menuTop}px ${menuRight}px`}
+          style={`height:${height}px;padding:0 ${menuRight}px`}
         >
           {children}
         </View>

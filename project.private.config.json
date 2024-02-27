@@ -9,16 +9,16 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/records/page",
-          "pathName": "pages/records/page",
-          "query": "",
+          "name": "pages/game/page",
+          "pathName": "pages/game/page",
+          "query": "category=animal&time=999",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/game/page",
-          "pathName": "pages/game/page",
-          "query": "category=idiom&time=999",
+          "name": "pages/records/page",
+          "pathName": "pages/records/page",
+          "query": "",
           "launchMode": "default",
           "scene": null
         },

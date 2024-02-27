@@ -5,11 +5,11 @@ import CategoryCard from '@/components/CategoryCard';
 import NavCustom from '@/components/NavCustom';
 import { getCategories } from '@/lib/fetchers/data';
 import { useState } from 'react';
-import menuInfo from '@/lib/getMenuInfo';
+import getMenuInfo from '@/lib/getMenuInfo';
 
 export default function Index() {
   const [categories, setCategories] = useState([]);
-  const { safeTop, menuRight } = menuInfo;
+  const { safeTop, menuRight } = getMenuInfo();
 
   useLoad(() => {
     getCategories().then((res: any) => {

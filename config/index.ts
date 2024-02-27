@@ -1,15 +1,15 @@
-import { defineConfig, type UserConfigExport } from '@tarojs/cli';
+import { defineConfig, UserConfigExport } from '@tarojs/cli';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import UnoCSS from 'unocss/webpack';
 import devConfig from './dev';
 import prodConfig from './prod';
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig(async (merge, { command, mode }) => {
+export default defineConfig(async (merge, {}) => {
   const baseConfig: UserConfigExport = {
     projectName: 'guess-game-taro',
     date: '2024-2-13',
-    designWidth(input) {
+    designWidth(input: any) {
       if (input?.file?.replace(/\\+/g, '/').indexOf('taro-ui/dist') > -1) {
         return 750;
       }
@@ -54,7 +54,7 @@ export default defineConfig(async (merge, { command, mode }) => {
           },
         },
       },
-      webpackChain(chain) {
+      webpackChain: (chain) => {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin);
         chain.plugin('unocss').use(UnoCSS());
       },

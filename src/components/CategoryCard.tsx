@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Button, View } from '@tarojs/components';
+import { Button, View, Image, Text } from '@tarojs/components';
 import SelectTime from '@/components/SelectTime';
-import CardBgSvg from '@/components/CardBgSvg';
+import card from '@/components/card.svg';
 
 export default function CategoryCard({ type, title, icon, desc }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +13,19 @@ export default function CategoryCard({ type, title, icon, desc }) {
           onClick={() => setIsOpen(true)}
           plain={true}
           style={`border:none`}
-          className='absolute top-0 left-0 z-10 w-full aspect-square p-0'
-        ></Button>
-        <CardBgSvg title={title} icon={icon} />
+          className='w-full aspect-square p-0'
+        >
+          <View className='relative w-full h-full'>
+            <Text className='absolute bottom-20rpx left-40rpx text-white'>
+              {title}
+            </Text>
+            <Image
+              className='absolute top-60rpx left-60rpx w-88rpx h-88rpx'
+              src={icon!}
+            />
+            <Image src={card} className='w-full h-full' />
+          </View>
+        </Button>
       </View>
       <SelectTime
         isOpen={isOpen}

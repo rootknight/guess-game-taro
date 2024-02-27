@@ -31,8 +31,7 @@ export default function RandomWord({
 
   // 获取过去1小时的记录以过滤后使用
   useEffect(() => {
-    const res = Taro.getStorageSync('words');
-    const storedWordsJSON = res.data;
+    const storedWordsJSON = Taro.getStorageSync('words');
     const storedWords = JSON.parse(storedWordsJSON || '[]');
     const nowUNIX = dayjs().valueOf();
     const filteredWords = storedWords.filter(
@@ -167,8 +166,7 @@ export default function RandomWord({
       sounds.countDownEndSound.play();
       //将抽取过的词存入LocalStorage
       // 获取之前的数据
-      const res = Taro.getStorageSync('words');
-      const storedWordsJSON = res.data;
+      const storedWordsJSON = Taro.getStorageSync('words');
       const parsedwords = JSON.parse(storedWordsJSON || '[]');
       // 新的数据
       const newData = {
@@ -195,7 +193,7 @@ export default function RandomWord({
     <View className='flex flex-col justify-between h-full'>
       <Countdown time={time} count={count} isEnd={isEnd} />
       <Text className='text-white text-xl center'>{disText}</Text>
-      <View className='flex justify-between pb-8'>
+      <View className='flex justify-between pb-1'>
         <View className='flex flex-col items-center'>
           <Text className='text-sm text-white'>
             跳过 {skipWords.current.length}

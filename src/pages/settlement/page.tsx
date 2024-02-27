@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { AtButton } from 'taro-ui';
 import SelectTime from '@/components/SelectTime';
 import NavCustom from '@/components/NavCustom';
-import menuInfo from '@/lib/getMenuInfo';
+import getMenuInfo from '@/lib/getMenuInfo';
 
 export default function Index() {
   const [latestRecord, setLatestRecord] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { safeTop, menuRight } = menuInfo;
+  const { safeTop, menuRight } = getMenuInfo();
 
   useLoad(() => {
     Taro.hideHomeButton();
@@ -54,17 +54,17 @@ export default function Index() {
             </Text>
           </View>
           {/* 占位 */}
-          <View style={`height:calc(${safeTop}px + 240rpx)`}></View>
+          <View style={`height:calc(${safeTop}px + 260rpx)`}></View>
         </View>
-        <View
-          className='grid grid-cols-2 gap-2 text-xl'
-          style={`height:calc(100vh - ${safeTop}px - 380rpx)`}
-        >
+        <View className='grid grid-cols-2 gap-2 text-xl'>
           <View className='text-emerald-500 flex flex-col'>
             <Text className='py-4 bg-gray-700 rounded-t-xl text-center'>
               正确：{successWords?.length || 0}
             </Text>
-            <View className='h-full flex flex-col items-center overflow-y-auto p-4 rounded-b-xl bg-gray-500'>
+            <View
+              className='flex flex-col items-center overflow-y-auto p-4 rounded-b-xl bg-gray-500'
+              style={`height:calc(100vh - ${safeTop}px - 600rpx)`}
+            >
               {successWords?.map((item: any, index: any) => (
                 <Text key={index}>{item}</Text>
               ))}
@@ -74,7 +74,10 @@ export default function Index() {
             <Text className='py-4 bg-gray-700 rounded-t-xl text-center text-xl'>
               跳过：{skipWords?.length || 0}
             </Text>
-            <View className='h-full line-through flex flex-col items-center overflow-y-auto p-4 rounded-b-xl bg-gray-500'>
+            <View
+              className='line-through flex flex-col items-center overflow-y-auto p-4 rounded-b-xl bg-gray-500'
+              style={`height:calc(100vh - ${safeTop}px - 600rpx)`}
+            >
               {skipWords?.map((item: any, index: any) => (
                 <Text key={index}>{item}</Text>
               ))}

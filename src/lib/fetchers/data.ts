@@ -5,6 +5,7 @@ export const baseUrl = process.env.TARO_APP_API;
 export const api = async (path: string, method?: any) => {
   const result = await Taro.request({
     url: `${baseUrl}${path}`,
+    enableCache: true,
     method: method || 'GET',
     dataType: 'json',
     header: {
